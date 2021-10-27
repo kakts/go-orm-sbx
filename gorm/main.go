@@ -23,6 +23,60 @@ func autoMigrate(db *gorm.DB) {
 	db.AutoMigrate(&users)
 }
 
+// addUsers add 2 users data with transaction
+func addUsers(db *gorm.DB) {
+	// Users2件の作成を1トランザクションで行う
+	tx := db.Begin()
+	user1 := models.Users{
+		Name: "test1",
+		Age:  8,
+	}
+	user2 := models.Users{
+		Name: "test2",
+		Age:  8,
+	}
+	tx.Create(&user1)
+	tx.Create(&user2)
+
+	success := true
+	if success {
+		// 正常時コミット成功
+		fmt.Println("Succeeded. commit will be executed.")
+		tx.Commit()
+	} else {
+		// ロールバック時の処理
+		fmt.Println("Failed. rollback will be executed.")
+		tx.Rollback()
+	}
+	fmt.Println("Transaction done!")
+}
+
+// getUser gets a data encounted first from Users table
+func getUser(db *gorm.DB) {
+
+	fmt.Println("[getUser] get a user data from Users table.")
+	userData := models.Users{}
+	db.First(&userData)
+
+	fmt.Printf("username = %s\n", userData.Name)
+}
+
+// getUsersByName gets Data corresponding to a name
+func getUsersByName(db *gorm.DB, name string) {
+
+	usersData := []models.Users{}
+	// 指定したnameの値に一致するデータを取得
+	db.Where("name = ?", name).Find(&usersData)
+
+	fmt.Printf("[getUsersByName] len = %d\n", len(usersData))
+
+	for i := 0; i < len(usersData); i++ {
+		userData := usersData[i]
+		// TODO userData.IDへのアクセス方法
+		fmt.Printf("users.name = %s, age = %d\n", userData.Name, userData.Age)
+	}
+}
+
 func main() {
 	d := repository.NewDB()
 	db := d.Connect()
@@ -48,28 +102,9 @@ func main() {
 		fmt.Printf("tableName: %s\n", table)
 	}
 
-	// Users2件の作成を1トランザクションで行う
-	tx := db.Begin()
-	user1 := models.Users{
-		Name: "test1",
-		Age:  8,
-	}
-	user2 := models.Users{
-		Name: "test2",
-		Age:  8,
-	}
-	tx.Create(&user1)
-	tx.Create(&user2)
+	addUsers(db)
 
-	success := false
-	if success {
-		// 正常時コミット成功
-		fmt.Println("Succeeded. commit will be executed.")
-		tx.Commit()
-	} else {
-		// ロールバック時の処理
-		fmt.Println("Failed. rollback will be executed.")
-		tx.Rollback()
-	}
-	fmt.Println("Transaction done!")
+	getUser(db)
+
+	getUsersByName(db, "test1")
 }
