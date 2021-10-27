@@ -12,3 +12,6 @@ down:
 init:
 	./init-mysql.sh
 
+.PHONY: mysql
+mysql:
+	mysql -uroot -proot -h "127.0.0.1"
