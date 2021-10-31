@@ -19,8 +19,8 @@ type Model struct {
 // usersテーブル用のデータモデル
 type Users struct {
 	gorm.Model
-	Name string
-	Age  uint8
+	Name string `gorm:"column:name"`
+	Age  uint8  `gorm:"column:age"`
 }
 
 // usersテーブル用のデータモデル
