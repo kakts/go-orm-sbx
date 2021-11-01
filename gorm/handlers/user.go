@@ -9,16 +9,21 @@ import (
 
 // form, jsonでのボディの変数名をタグで指定する
 type RegistUserForm struct {
-	Name string `form: "name" json:"name" binding:"required"`
-	Age  uint8  `form: "age" json:"age" binding:"required"`
+	Name string `form:"name" json:"name" binding:"required"`
+	Age  uint8  `form:"age" json:"age" binding:"required"`
 }
 
 type GetUserByNameForm struct {
-	Name string `form: "name" json:"name" binding:"required"`
+	Name string `form:"name" json:"name" binding:"required"`
+}
+
+type GetUserByIdForm struct {
+	Id uint `uri:"id" binding:"required"`
 }
 
 type UserController struct{}
 
+// GET:/users 一件目のユーザを取得
 func (uc UserController) GetUser(c *gin.Context) {
 	// user serviceを呼び出す
 	var s = service.Service{}
@@ -29,6 +34,7 @@ func (uc UserController) GetUser(c *gin.Context) {
 	})
 }
 
+// GET:/users/findname 指定した名前に一致するユーザ一覧を取得
 func (uc UserController) GetUserByName(c *gin.Context) {
 	// Bodyからnameを取る
 	var s = service.Service{}
@@ -46,6 +52,34 @@ func (uc UserController) GetUserByName(c *gin.Context) {
 	})
 }
 
+// TODO 指定したidのユーザデータのネガティブキャッシュ
+// TODO 負荷試験 ネガティブキャッシュ有り版となし版での比較をする
+// GET:/users/:id 指定したIDのユーザを取得
+func (uc UserController) GetUserById(c *gin.Context) {
+	// Bodyからnameを取る
+	var s = service.Service{}
+	var form GetUserByIdForm
+	// uriからidをbindする
+	err := c.ShouldBindUri(&form)
+	if err != nil {
+		c.JSON(400, gin.H{"msg": err.Error()})
+		return
+	}
+
+	fmt.Printf("[GetUserById] Got Id from req uri. Id: %d\n", form.Id)
+	user := s.GetUserById(form.Id)
+	if user == nil {
+		c.JSON(404, gin.H{
+			"msg": fmt.Errorf("[GetUserById] status: 404 Cannot find user id:%d", form.Id).Error(),
+		})
+		return
+	}
+	c.JSON(200, gin.H{
+		"Users": user,
+	})
+}
+
+// POST:/users/register ユーザ登録
 func (uc UserController) RegistUser(c *gin.Context) {
 	// userを登録する
 	// NameとAgeのチェック

@@ -5,6 +5,7 @@ import (
 
 	"github.com/kakts/go-orm-sbx/gorm/models"
 	"github.com/kakts/go-orm-sbx/gorm/repository"
+	"gorm.io/gorm"
 )
 
 type Service struct{}
@@ -34,6 +35,21 @@ func (s Service) GetUserByName(name string) []models.Users {
 	db.Where("name = ?", name).Find(&userData)
 
 	return userData
+}
+
+// nameに一致したユーザを取得
+func (s Service) GetUserById(id uint) *models.Users {
+	db := repository.GetDB()
+
+	userData := models.Users{
+		Model: gorm.Model{ID: id},
+	}
+	result := db.Where("id = ?", id).Find(&userData)
+
+	if result.RowsAffected == 0 {
+		return nil
+	}
+	return &userData
 }
 
 func (s Service) GetUsers() []models.Users {

@@ -30,6 +30,7 @@ func router() *gin.Engine {
 	{
 		controller := handlers.UserController{}
 		u.GET("", controller.GetUser)
+		u.GET("/:id", controller.GetUserById)
 		u.POST("register", controller.RegistUser)
 		u.GET("findname", controller.GetUserByName)
 	}
