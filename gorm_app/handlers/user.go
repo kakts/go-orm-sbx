@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kakts/go-orm-sbx/gorm/service"
+	"github.com/kakts/go-orm-sbx/gorm_app/service"
 )
 
 // form, jsonでのボディの変数名をタグで指定する

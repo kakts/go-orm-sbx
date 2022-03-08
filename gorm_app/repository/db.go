@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/kakts/go-orm-sbx/gorm/models"
+	"github.com/kakts/go-orm-sbx/gorm_app/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )

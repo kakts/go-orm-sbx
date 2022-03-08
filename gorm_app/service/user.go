@@ -3,8 +3,8 @@ package service
 import (
 	"fmt"
 
-	"github.com/kakts/go-orm-sbx/gorm/models"
-	"github.com/kakts/go-orm-sbx/gorm/repository"
+	"github.com/kakts/go-orm-sbx/gorm_app/models"
+	"github.com/kakts/go-orm-sbx/gorm_app/repository"
 	"gorm.io/gorm"
 )
 

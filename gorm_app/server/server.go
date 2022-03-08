@@ -6,7 +6,7 @@ package server
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/kakts/go-orm-sbx/gorm/handlers"
+	"github.com/kakts/go-orm-sbx/gorm_app/handlers"
 )
 
 func Init() {
