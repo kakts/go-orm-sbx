@@ -5,20 +5,27 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	swaggerFiles "github.com/swaggo/gin-swagger/swaggerFiles"
 
 	"github.com/kakts/go-orm-sbx/gorm_app/handlers"
 )
 
+//
 func Init() {
 	r := router()
 
 	r.Run()
 }
 
-// routing
 func router() *gin.Engine {
 
 	r := gin.Default()
+
+	// TODO 開発環境のみセットする
+	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Hello world",

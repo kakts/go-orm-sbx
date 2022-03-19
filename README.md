@@ -22,4 +22,3 @@ or
 ./init-mysql.sh
 ```
 これにより、MySQLコンテナ内でMySQLの初期化スクリプトを実行する
-

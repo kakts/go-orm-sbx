@@ -27,7 +27,10 @@ type ResultUserNameAge struct {
 	Age  uint8
 }
 
-// nameに一致したユーザ一覧を取得
+// GetUserByName
+// @title GetUserByName
+// @version 0.1
+// @description Get User Data by name. name is required.
 func (s Service) GetUserByName(name string) []models.Users {
 	db := repository.GetDB()
 
