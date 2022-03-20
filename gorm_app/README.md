@@ -1,5 +1,7 @@
 # gorm
 gorm用app
+
+# how to run
 ## run gorm app
 ```
 make run

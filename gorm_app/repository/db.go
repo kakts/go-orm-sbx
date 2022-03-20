@@ -34,16 +34,15 @@ type DB struct {
 	Connection *gorm.DB
 }
 
-func InitDB() {
-	fmt.Println("NewDB called")
-	c := NewConfig()
-	newDB(&DB{
+// getDBConfigByEnv 環境に応じてDBの接続設定を取得する
+func getDBConfigByEnv(c Config) *DB {
+	return &DB{
 		Host:     c.DB.Local.Host,
 		Port:     c.DB.Local.Port,
 		Username: c.DB.Local.Username,
 		Password: c.DB.Local.Password,
 		DBName:   c.DB.Local.DBName,
-	})
+	}
 }
 
 // makeDsn returns dsn
@@ -62,6 +61,21 @@ func newDB(d *DB) *DB {
 	d.Connection = db
 	autoMigrate()
 	return d
+}
+
+// InitDB DB接続処理
+func InitDB() {
+	fmt.Println("NewDB called")
+	c := NewConfig()
+
+	// TODO 環境で設定切り替え
+	newDB(&DB{
+		Host:     c.DB.Local.Host,
+		Port:     c.DB.Local.Port,
+		Username: c.DB.Local.Username,
+		Password: c.DB.Local.Password,
+		DBName:   c.DB.Local.DBName,
+	})
 }
 
 // Begin begins a transaction

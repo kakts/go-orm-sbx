@@ -14,6 +14,7 @@ import (
 // @BasePath /
 // startup server with initializing db
 func main() {
+	// テストとわけるため、repositoryはインターフェースにして分ける
 	repository.InitDB()
 	server.Init()
 }
