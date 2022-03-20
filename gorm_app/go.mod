@@ -1,21 +1,24 @@
-module github.com/kakts/go-orm-sbx/gorm
+module github.com/kakts/go-orm-sbx/gorm_app
 
 go 1.16
 
 require (
-	github.com/DATA-DOG/go-sqlmock v1.5.0 // indirect
-	github.com/gin-gonic/gin v1.7.4
-	github.com/go-playground/validator/v10 v10.9.0 // indirect
+	github.com/gin-gonic/gin v1.7.7
+	github.com/go-openapi/swag v0.21.1 // indirect
+	github.com/go-playground/validator/v10 v10.10.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
-	github.com/ugorji/go v1.2.6 // indirect
-	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
-	golang.org/x/sys v0.0.0-20211031064116-611d5d643895 // indirect
-	golang.org/x/text v0.3.7 // indirect
+	github.com/swaggo/gin-swagger v1.4.1
+	github.com/swaggo/swag v1.8.0
+	github.com/ugorji/go v1.2.7 // indirect
+	golang.org/x/crypto v0.0.0-20220307211146-efcb8507fb70 // indirect
+	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
+	golang.org/x/sys v0.0.0-20220307203707-22a9840ba4d7 // indirect
+	golang.org/x/tools v0.1.9 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/driver/mysql v1.1.2
 	gorm.io/gorm v1.22.0
 )

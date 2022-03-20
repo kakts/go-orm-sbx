@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kakts/go-orm-sbx/gorm/service"
+	"github.com/kakts/go-orm-sbx/gorm_app/service"
 )
 
 // form, jsonでのボディの変数名をタグで指定する
@@ -23,6 +23,18 @@ type GetUserByIdForm struct {
 
 type UserController struct{}
 
+// UserResponse Response用ユーザデータ
+type UserResponse struct {
+	Name string
+	Age  uint
+}
+
+// @Summary ユーザ取得 GET:/users
+// @Description 1件取得
+// @Accept json
+// @Produce json
+// @Success 200 {object} UserResponse
+// @Router /users [get]
 // GET:/users 一件目のユーザを取得
 func (uc UserController) GetUser(c *gin.Context) {
 	// user serviceを呼び出す

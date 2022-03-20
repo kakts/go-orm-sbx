@@ -8,27 +8,37 @@ make run
 ```
 
 
-## ローカル開発の場合
-起動時にMySQLへ接続するため、ローカル環境にMySQLを立ち上げている必要があります。
-このリポジトリのトップディレクトリにdocker-compose.ymlで、設定しており、docker composeで関連するコンポーネントを起動してから、 gorm appを起動してください
+# how to develop
 
+## start up MySQL
+Start up MySQL container from Make command located in root directry.
 ```
-$ pwd
-/Users/hoge/fuga/go-orm-sbx
-
-$ make up
-# MySQLなどを起動
-
-$ cd gorm_app
-$ make run
-
-> [GIN-debug] Listening and serving HTTP on :8080
-
-起動後、8080ポートへリクエストをして疎通確認
-
-$ curl localhost:8080
-{"message":"Hello world"}%  
+cd ../; make up
 ```
 
+## setting up swagger tools
+- install swag.
+```
+make install
+```
 
+- check if `swag` command can be used.
+```
+swag
 
+NAME:
+   swag - Automatically generate RESTful API documentation with Swagger 2.0 for Go.
+...
+```
+
+- Initializing swag.
+```
+$ make swag_init
+swag init
+2022/03/09 01:50:28 Generate swagger docs....
+2022/03/09 01:50:28 Generate general API Info, search dir:./
+2022/03/09 01:50:28 create docs.go at  docs/docs.go
+2022/03/09 01:50:28 create swagger.json at  docs/swagger.json
+2022/03/09 01:50:28 create swagger.yaml at  docs/swagger.yaml
+
+```
