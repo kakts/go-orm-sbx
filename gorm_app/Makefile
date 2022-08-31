@@ -11,6 +11,6 @@ install-tools:
 		go install -v $$tool; \
 	done
 
-.PHONY: swag_init
-swag_init: # swagger用にコードからdocsにswagger情報を書き出す
+.PHONY: doc
+doc: # swagger用にコードからdocsにswagger情報を書き出す
 	swag init --parseDependency true

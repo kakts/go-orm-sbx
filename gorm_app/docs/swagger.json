@@ -29,9 +29,40 @@
                     }
                 }
             }
+        },
+        "/users/findname": {
+            "get": {
+                "description": "指定した名前に一致するユーザ一覧を取得",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "GET:/users/findname 指定した名前に一致するユーザ一覧を取得",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.UserByNameResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "handlers.UserByNameResponse": {
+            "type": "object",
+            "properties": {
+                "counts": {
+                    "type": "integer"
+                },
+                "users": {
+                    "$ref": "#/definitions/handlers.UserResponse"
+                }
+            }
+        },
         "handlers.UserResponse": {
             "type": "object",
             "properties": {

@@ -1,14 +1,16 @@
 # gorm
 gorm用app
 
-# how to run
+# How to run
 ## run gorm app
 ```
 make run
 ```
 
+## API Document
+- Access to localhost:8080/swagger/index.html
 
-# how to develop
+# How to develop
 
 ## start up MySQL
 Start up MySQL container from Make command located in root directry.
@@ -31,9 +33,9 @@ NAME:
 ...
 ```
 
-- Initializing swag.
+- Update API document.
 ```
-$ make swag_init
+$ make doc
 swag init
 2022/03/09 01:50:28 Generate swagger docs....
 2022/03/09 01:50:28 Generate general API Info, search dir:./
@@ -42,3 +44,4 @@ swag init
 2022/03/09 01:50:28 create swagger.yaml at  docs/swagger.yaml
 
 ```
+

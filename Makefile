@@ -18,4 +18,4 @@ init:
 
 .PHONY: mysql
 mysql:
-	mysql -uroot -proot -h "127.0.0.1"
+	mysql -udocker -pdocker -h "127.0.0.1"

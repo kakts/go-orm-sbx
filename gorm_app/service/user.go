@@ -8,7 +8,9 @@ import (
 	"gorm.io/gorm"
 )
 
-type Service struct{}
+type Service struct {
+	db *gorm.DB
+}
 
 func (s Service) GetUser() models.Users {
 	db := repository.GetDB()

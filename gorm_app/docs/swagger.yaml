@@ -1,5 +1,12 @@
 basePath: /
 definitions:
+  handlers.UserByNameResponse:
+    properties:
+      counts:
+        type: integer
+      users:
+        $ref: '#/definitions/handlers.UserResponse'
+    type: object
   handlers.UserResponse:
     properties:
       age:
@@ -28,4 +35,17 @@ paths:
           schema:
             $ref: '#/definitions/handlers.UserResponse'
       summary: ユーザ取得 GET:/users
+  /users/findname:
+    get:
+      consumes:
+      - application/json
+      description: 指定した名前に一致するユーザ一覧を取得
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UserByNameResponse'
+      summary: GET:/users/findname 指定した名前に一致するユーザ一覧を取得
 swagger: "2.0"
