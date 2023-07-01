@@ -4,8 +4,6 @@ package docs
 
 import (
     "github.com/swaggo/swag"
-    "github.com/swaggo/gin-swagger"
-    "github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 const docTemplate = `{
